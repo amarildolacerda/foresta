@@ -1,0 +1,123 @@
+name: floresta
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 2021.10.07
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.3
+  flutter_localizations:
+    sdk: flutter
+
+  get: 
+  provider: 
+  universal_io: 
+  uuid: 
+  encrypt: 
+
+  
+  desktop_window: #^0.4.0
+
+  console:
+    path: ../console
+  intl: 
+  charts_flutter: 
+  
+
+#dependency_overrides:
+  #pointycastle: ^3.2.0-rc0
+  #pdf:
+  #  git:
+  #    url: https://github.com/DavBfr/dart_pdf.git
+  #    ref: master
+  #    path: pdf
+
+  #printing:
+  #  git:
+  #    url: https://github.com/DavBfr/dart_pdf.git
+  #    ref: master
+  #    path: printing
+  #crypto: ^3.0.1
+  #dio: ^4.0.0
+  #image_picker: ^0.7.2+1
+  #provider: ^6.0.0
+  #encrypt: ^5.0.1
+  #args: ^2.0.0
+  #convert: ^3.0.0
+  #timezone: ^0.8.0
+  #firebase_messaging: ^10.0.0
+
+  controls_web:
+    git:
+      url: https://github.com/amarildolacerda/flutter_dart.git
+      path: controls_web
+
+
+  controls_firebase:
+    git:
+      url: https://github.com/amarildolacerda/flutter_dart.git
+      path: controls_firebase
+  controls_data:
+    git:
+      url: https://github.com/amarildolacerda/flutter_dart.git
+      path: controls_data
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^1.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+     - assets/
+     - assets/nav/
+
+msix_config:
+  #https://sahajrana.medium.com/how-to-generate-a-pfx-certificate-for-flutter-windows-msix-lib-a860cdcebb8
+  display_name: Storeware Gestor
+  publisher_display_name: WBA Gestão - Storeware
+  identity_name: com.storeware.gestor
+  msix_version: 2021.9.16.0
+  certificate_path: C:\Flutter\miniapps\wbagestao.pfx
+  certificate_password: 1234
+  publisher: CN=wbagestao, O=wbagestao, S=SaoPaulo, C=BR
+  logo_path: .\web\favicon.png
+  start_menu_icon_path: .\web\favicon.png
+  tile_icon_path: .\web\favicon.png
+  #vs_generated_images_folder_path: .\Images
+  icons_background_color: transparent
+  architecture: x64
+  capabilities: "internetClient,location,microphone,webcam"
