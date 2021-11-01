@@ -4,7 +4,9 @@ import 'package:console/views/dashboard/eventos/dashboard_eventos_page.dart';
 import 'package:controls_web/controls/injects.dart';
 //import 'package:controls_web/controls/responsive.dart';
 import 'package:controls_web/controls.dart';
+import 'package:controls_web/controls/widget_extensions.dart';
 import 'package:floresta/views/cadastros/propriedades_view.dart';
+import 'package:floresta/views/home/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:controls_web/controls/dialogs_widgets.dart';
 
@@ -108,11 +110,11 @@ class _HomeViewState extends State<HomeView> {
           ]),
           elevation: 0,
           //forceElevated: false,
-          actions: [
-            const CircleAvatar(
+          actions: const [
+            CircleAvatar(
               child: Icon(Icons.person),
             ),
-            const SizedBox(width: 10),
+            SizedBox(width: 10),
           ]),
       extendBody: true,
       flex: responsive!.isTablet ? 4 : 5,
@@ -137,20 +139,24 @@ class _HomeViewState extends State<HomeView> {
           image: const Icon(Icons.place),
           label: 'Propriedades',
           onPressed: () {
-            showPage(context, child: const PropriedadesView());
+            showMobilePage(context,
+                title: 'Propriedades',
+                child: [].stepper(
+                    itemBuilder: (a, b) =>
+                        Step(content: Container(), title: const Text('')),
+                    type: StepperType.horizontal,
+                    choices: [
+                      TabChoice(
+                        label: 'Propriedades',
+                        builder: () => const PropriedadesView()
+                            .sizedBox(width: 300, height: 300),
+                      ),
+                      TabChoice(
+                        label: 'Lote',
+                        builder: () => Container(),
+                      )
+                    ]));
           })
     ]);
-  }
-
-  showPage(BuildContext context, {required Widget child}) {
-    return Dialogs.showPage(context,
-        fullPage: true,
-        child: MobileScaffold(
-          appBar: AppBar(elevation: 0, title: const Text('Propriedades')),
-          body: child,
-          bottomNavigationBar: const BarraNavegacaoPadrao(
-            itemIndex: -1,
-          ),
-        ));
   }
 }

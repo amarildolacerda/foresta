@@ -2,6 +2,8 @@ import 'package:console/builders/index.dart';
 import 'package:controls_data/odata_client.dart';
 import 'package:controls_web/controls.dart';
 import 'package:floresta/models/propriedades_model.dart';
+import 'package:floresta/views/cadastros/propriedade_lotes_view.dart';
+import 'package:floresta/views/home/utils.dart';
 import 'package:flutter/material.dart';
 
 class PropriedadesView extends StatelessWidget {
@@ -10,13 +12,15 @@ class PropriedadesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DataViewer(
+      rowsPerPage: 20,
+      showPageNavigatorButtons: false,
       canInsert: true,
       canEdit: true,
-      controller: controller,
+      controller: controller(context),
     );
   }
 
-  static get controller => DataViewerController(
+  static controller(BuildContext context) => DataViewerController(
           keyName: 'id',
           dataSource: PropriedadesModel(),
           future: () => PropriedadesModel().listCached(orderBy: 'fantasia'),
@@ -45,5 +49,26 @@ class PropriedadesView extends StatelessWidget {
                   }));
                 }),
             DataViewerHelper.simnaoColumn(DataViewerColumn(name: 'inativo')),
+            DataViewerColumn(
+                name: 'edit',
+                builder: (
+                  a,
+                  b,
+                ) {
+                  if ((b['inativo'] ?? '') == 'S') {
+                    return Icon(Icons.block_flipped, color: Colors.grey[400]);
+                  }
+                  return InkButton(
+                    child: const Icon(Icons.aspect_ratio_sharp),
+                    onTap: () {
+                      showMobilePage(context,
+                          //width: 350,
+                          //height: 500,
+                          showNavBar: false,
+                          title: 'Lotes propriedade [${b['nome']}]',
+                          child: PropriedadeLotesView(propriedadeId: b['id']));
+                    },
+                  );
+                })
           ]);
 }
